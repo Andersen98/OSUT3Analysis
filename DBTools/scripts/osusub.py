@@ -931,6 +931,7 @@ if not arguments.localConfig:
 ###############################################################################
 UseAAA = False
 UseGridProxy = False
+atFermi = False
 Generic = False
 if arguments.Generic:
     Generic = True
@@ -942,6 +943,8 @@ lxbatch  = False
 hostname = socket.gethostname()
 if 'cern.ch' in hostname:
     lxbatch = True
+if 'fnal.gov' in hostname:
+	atFermi = True
 if 'interactive' in hostname:
     remoteAccessT3 = False
 if arguments.Redirector != "":
@@ -952,6 +955,11 @@ if arguments.Redirector != "":
 ###############################################################################
 #                End of Setup stage, will begin to submit jobs                #
 ###############################################################################
+
+#Simply stop the script if running at fermilab
+if atFermi:
+	sys.exit()
+
 # Remove duplicates
 split_datasets = list(set(split_datasets))
 
