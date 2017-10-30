@@ -1053,7 +1053,11 @@ if not arguments.Resubmit:
         exec('import ' + re.sub (r"(.*)\.py$", r"\1", Config) + ' as temPset')
 
         for dataset in split_datasets:
-            currentCondorSubArgumentsSet = copy.deepcopy(CondorSubArgumentsSet)
+			if atFermi:
+            	currentCondorSubArgumentsSet = copy.deepcopy(CondorSubArgumentsSet_Fermi)
+			else:
+				currentCondorSubArgumentsSet = copy.deepcopy(CondorSubArgumentsSet)
+
             EventsPerJob = -1
             DatasetName = dataset
             NumberOfJobs = int(arguments.NumberOfJobs)
